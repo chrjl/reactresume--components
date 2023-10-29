@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@reactresume/types": "workspace:*",
     "@types/react": "^18.2.28",
     "typescript": "^5.2.2"
   },

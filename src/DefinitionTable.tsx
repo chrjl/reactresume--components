@@ -1,6 +1,11 @@
 import React from 'react';
+import { ResumeEntry } from '@reactresume/types';
 
-export const DefinitionTable = ({ data }) => (
+interface DefinitionTableProps {
+  data: ResumeEntry[];
+}
+
+export const DefinitionTable = ({ data }: DefinitionTableProps) => (
   <dl>
     {data.map(({ title, description }, index) => (
       <React.Fragment key={index}>

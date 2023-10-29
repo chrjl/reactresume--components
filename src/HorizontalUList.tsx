@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.div<{ $cushion?: string }>`
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
@@ -10,6 +10,7 @@ const Container = styled.div`
   & ul {
     display: flex;
     flex-wrap: wrap;
+    margin: ${({ $cushion = '1.5em' }) => `0 -${$cushion}`};
   }
 
   & li::before,
@@ -20,13 +21,13 @@ const Container = styled.div`
     vertical-align: text-bottom;
     font-weight: 600;
     box-sizing: border-box;
-    width: 1.5em;
+    width: ${({ $cushion = '1.5em' }) => $cushion};
   }
 `;
 
 const ContainerLeft = styled(Container)`
   & ul {
-    margin-left: -1.5em;
+    margin-right: 0;
     justify-content: left;
   }
 
@@ -37,7 +38,7 @@ const ContainerLeft = styled(Container)`
 
 const ContainerRight = styled(Container)`
   & ul {
-    margin-right: -1.5em;
+    margin-left: 0;
     justify-content: right;
   }
 
@@ -49,7 +50,7 @@ const ContainerRight = styled(Container)`
 interface Props {
   items: React.ReactNode[];
   align?: 'left' | 'right';
-  cushion?: string;
+  cushion?: string; // CSS units
   separator?: string;
 }
 
@@ -70,10 +71,10 @@ export const HorizontalUList = ({
 
   switch (align) {
     case 'left': {
-      return <ContainerLeft>{list}</ContainerLeft>;
+      return <ContainerLeft $cushion={cushion}>{list}</ContainerLeft>;
     }
     case 'right': {
-      return <ContainerRight>{list}</ContainerRight>;
+      return <ContainerRight $cushion={cushion}>{list}</ContainerRight>;
     }
     default: {
       console.error('HorizontalUList: align must be either "left" or "right"');

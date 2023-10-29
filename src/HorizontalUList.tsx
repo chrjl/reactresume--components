@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ContainerLeft = styled.div`
+const Container = styled.div`
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
   line-height: normal;
 
   & ul {
-    margin-left: -1.5em;
     display: flex;
     flex-wrap: wrap;
   }
 
-  & li::before {
+  & li::before,
+  & li::after {
     content: '|';
     display: inline-block;
     text-align: center;
@@ -24,27 +24,25 @@ const ContainerLeft = styled.div`
   }
 `;
 
-const ContainerRight = styled.div`
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  line-height: normal;
-
+const ContainerLeft = styled(Container)`
   & ul {
-    margin-right: -1.5em;
-    display: flex;
-    justify-content: right;
-    flex-wrap: wrap;
+    margin-left: -1.5em;
+    justify-content: left;
   }
 
   & li::after {
-    content: '|';
-    display: inline-block;
-    text-align: center;
-    vertical-align: text-bottom;
-    font-weight: 600;
-    box-sizing: border-box;
-    width: 1.5em;
+    display: none;
+  }
+`;
+
+const ContainerRight = styled(Container)`
+  & ul {
+    margin-right: -1.5em;
+    justify-content: right;
+  }
+
+  & li::before {
+    display: none;
   }
 `;
 
@@ -62,8 +60,8 @@ export const HorizontalUList = ({
   separator,
 }: Props) => {
   if (!items) {
-    console.error('HorizontalUList did not receive any items.')
-    return
+    console.error('HorizontalUList did not receive any items.');
+    return;
   }
 
   const list = (

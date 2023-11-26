@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div<{ $cushion?: string }>`
+const Container = styled.div<{ $cushion?: string; $separator?: string }>`
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
@@ -15,7 +15,7 @@ const Container = styled.div<{ $cushion?: string }>`
 
   & li::before,
   & li::after {
-    content: '|';
+    content: ${({ $separator }) => `\"${$separator || '|'}\"`};
     display: inline-block;
     text-align: center;
     vertical-align: text-bottom;
@@ -71,10 +71,18 @@ export const HorizontalUList = ({
 
   switch (align) {
     case 'left': {
-      return <ContainerLeft $cushion={cushion}>{list}</ContainerLeft>;
+      return (
+        <ContainerLeft $cushion={cushion} $separator={separator}>
+          {list}
+        </ContainerLeft>
+      );
     }
     case 'right': {
-      return <ContainerRight $cushion={cushion}>{list}</ContainerRight>;
+      return (
+        <ContainerRight $cushion={cushion} $separator={separator}>
+          {list}
+        </ContainerRight>
+      );
     }
     default: {
       console.error('HorizontalUList: align must be either "left" or "right"');

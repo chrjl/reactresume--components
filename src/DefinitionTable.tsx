@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import { ResumeEntry } from '@reactresume/types';
 
-const Container = styled.dl`
+const Container = styled.dl<{ $dtWidth?: string; $columnGap?: string }>`
   display: grid;
-  grid-template-columns: 12em auto;
+  grid-template-columns: ${(props) => `${props.$dtWidth || 'max-content'} auto`};
   align-items: center;
-  column-gap: 2em;
+  column-gap: ${(props) => props.$columnGap || '2em'};
   row-gap: 0.5em;
 `;
 
@@ -16,15 +16,16 @@ const Title = styled.dt`
   font-weight: bold;
 `;
 
-const Description = styled.dd`
-`;
+const Description = styled.dd``;
 
-interface DefinitionTableProps {
+interface Props {
   data: ResumeEntry[];
+  dtWidth?: string; // CSS units
+  columnGap?: string; // CSS units
 }
 
-export const DefinitionTable = ({ data }: DefinitionTableProps) => (
-  <Container>
+export const DefinitionTable = ({ data, dtWidth, columnGap }: Props) => (
+  <Container $dtWidth={dtWidth} $columnGap={columnGap}>
     {data.map(({ title, description }, index) => (
       <React.Fragment key={index}>
         <Title>{title}</Title>

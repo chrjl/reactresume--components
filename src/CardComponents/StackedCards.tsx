@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { ResumeEntry } from '@reactresume/types';
 import { Card } from './Card';
 
-interface StackedCardsProps {
-  data: ResumeEntry[];
+interface StackedContainerProps {
+  $rowGap?: string;
 }
 
-const StackedContainer = styled.div`
+const StackedContainer = styled.div<StackedContainerProps>`
   display: flex;
   flex-direction: column;
-  row-gap: 2em;
+  grid-row-gap: ${({ $rowGap }) => $rowGap || '2em'};
 
   & .heading {
     display: flex;
@@ -42,8 +42,13 @@ const StackedContainer = styled.div`
   }
 `;
 
-export const StackedCards = ({ data }: StackedCardsProps) => (
-  <StackedContainer>
+interface StackedCardsProps {
+  data: ResumeEntry[];
+  rowGap?: string; // CSS units
+}
+
+export const StackedCards = ({ data, rowGap }: StackedCardsProps) => (
+  <StackedContainer $rowGap={rowGap}>
     {data.map((entry, index) => (
       <Card key={index} entry={entry} />
     ))}

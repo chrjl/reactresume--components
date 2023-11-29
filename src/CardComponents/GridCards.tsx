@@ -4,11 +4,16 @@ import styled from 'styled-components';
 import { ResumeEntry } from '@reactresume/types';
 import { Card } from './Card';
 
-const GridContainer = styled.div`
+interface GridContainerProps {
+  $rowGap?: string;
+  $columnGap?: string;
+}
+
+const GridContainer = styled.div<GridContainerProps>`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 2em;
-  grid-row-gap: 2em;
+  grid-column-gap: ${({ $columnGap }) => $columnGap || '2em'};
+  grid-row-gap: ${({ $rowGap }) => $rowGap || '2em'};
 
   & .heading {
     display: flex;
@@ -53,10 +58,12 @@ const GridContainer = styled.div`
 
 interface GridCardsProps {
   data: ResumeEntry[];
+  columnGap?: string;
+  rowGap?: string;
 }
 
-export const GridCards = ({ data }: GridCardsProps) => (
-  <GridContainer>
+export const GridCards = ({ data, rowGap, columnGap }: GridCardsProps) => (
+  <GridContainer $rowGap={rowGap} $columnGap={columnGap}>
     {data.map((entry, index) => (
       <Card key={index} entry={entry} />
     ))}

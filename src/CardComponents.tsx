@@ -23,3 +23,9 @@ export const Card = ({ entry }: CardProps) => {
   );
 };
 
+interface GridCardsProps {
+  data: ResumeEntry[];
+}
+
+export const GridCards = ({ data }: GridCardsProps) =>
+  data.map((entry, index) => <Card key={index} entry={entry} />);

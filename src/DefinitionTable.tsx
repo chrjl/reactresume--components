@@ -3,12 +3,19 @@ import styled from 'styled-components';
 
 import { ResumeEntry } from '@reactresume/types';
 
-const Container = styled.dl<{ $dtWidth?: string; $columnGap?: string }>`
+interface ContainerProps {
+  $firstColumnWidth?: string;
+  $columnGap?: string;
+  $rowGap?: string;
+}
+
+const Container = styled.dl<ContainerProps>`
   display: grid;
-  grid-template-columns: ${(props) => `${props.$dtWidth || 'max-content'} auto`};
+  grid-template-columns: ${({ $firstColumnWidth }) =>
+    `${$firstColumnWidth || 'max-content'} auto`};
   align-items: center;
-  column-gap: ${(props) => props.$columnGap || '2em'};
-  row-gap: 0.5em;
+  column-gap: ${({ $columnGap }) => $columnGap || '2em'};
+  row-gap: ${({ $rowGap }) => $rowGap || '0.5em'};
 `;
 
 const Title = styled.dt`
@@ -20,12 +27,22 @@ const Description = styled.dd``;
 
 interface Props {
   data: ResumeEntry[];
-  dtWidth?: string; // CSS units
+  firstColumnWidth?: string; // CSS units
+  rowGap?: string; // CSS units
   columnGap?: string; // CSS units
 }
 
-export const DefinitionTable = ({ data, dtWidth, columnGap }: Props) => (
-  <Container $dtWidth={dtWidth} $columnGap={columnGap}>
+export const DefinitionTable = ({
+  data,
+  firstColumnWidth,
+  rowGap,
+  columnGap,
+}: Props) => (
+  <Container
+    $firstColumnWidth={firstColumnWidth}
+    $columnGap={columnGap}
+    $rowGap={rowGap}
+  >
     {data.map(({ title, description }, index) => (
       <React.Fragment key={index}>
         <Title>{title}</Title>

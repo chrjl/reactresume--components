@@ -84,3 +84,10 @@ export const GridCards = ({ data }: GridCardsProps) => (
     ))}
   </GridContainer>
 );
+
+interface StackedCardsProps {
+  data: ResumeEntry[];
+}
+
+export const StackedCards = ({ data }: StackedCardsProps) =>
+  data.map((entry, index) => <Card key={index} entry={entry} />);

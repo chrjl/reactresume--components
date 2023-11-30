@@ -18,6 +18,7 @@ const GridContainer = styled.div<GridContainerProps>`
   & .heading {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
     justify-content: space-between;
 
     text-transform: uppercase;
@@ -25,18 +26,18 @@ const GridContainer = styled.div<GridContainerProps>`
 
     & .title {
       white-space: nowrap;
+      display: block;
     }
 
     & .subtitle {
+      display: block;
       margin-left: auto;
       color: #666666;
-      font-size: 85%;
     }
   }
 
   & .body {
     & .note {
-      font-size: 85%;
       margin-bottom: 1em;
     }
 

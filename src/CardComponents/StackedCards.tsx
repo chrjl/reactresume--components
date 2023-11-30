@@ -16,11 +16,10 @@ const StackedContainer = styled.div<StackedContainerProps>`
   & .heading {
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
+    align-items: flex-end;
 
     & .title {
       font-weight: bold;
-      font-size: 110%;
     }
 
     & .subtitle {

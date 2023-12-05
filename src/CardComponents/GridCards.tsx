@@ -66,7 +66,7 @@ interface GridCardsProps {
 export const GridCards = ({ data, rowGap, columnGap }: GridCardsProps) => (
   <GridContainer $rowGap={rowGap} $columnGap={columnGap}>
     {data.map((entry, index) => (
-      <Card key={index} entry={entry} />
+      <Card key={index} entry={entry} className="grid-card" />
     ))}
   </GridContainer>
 );

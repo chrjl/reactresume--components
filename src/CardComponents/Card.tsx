@@ -2,13 +2,14 @@ import { ResumeEntry } from '@reactresume/types';
 
 interface CardProps {
   entry: ResumeEntry;
+  className?: string;
 }
 
-export const Card = ({ entry }: CardProps) => {
+export const Card = ({ entry, className }: CardProps) => {
   const { title, subtitle, note, description, highlights } = entry;
 
   return (
-    <div>
+    <div className={className}>
       <div className="heading">
         <span className="title">{title}</span>
         {subtitle && <span className="subtitle">{subtitle}</span>}
@@ -22,4 +23,3 @@ export const Card = ({ entry }: CardProps) => {
     </div>
   );
 };
-

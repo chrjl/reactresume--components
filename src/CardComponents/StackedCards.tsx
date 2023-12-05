@@ -43,13 +43,14 @@ const StackedContainer = styled.div<StackedContainerProps>`
 
 interface StackedCardsProps {
   data: ResumeEntry[];
+  className?: string;
   rowGap?: string; // CSS units
 }
 
 export const StackedCards = ({ data, rowGap }: StackedCardsProps) => (
   <StackedContainer $rowGap={rowGap}>
     {data.map((entry, index) => (
-      <Card key={index} entry={entry} />
+      <Card key={index} entry={entry} className="stacked-card" />
     ))}
   </StackedContainer>
 );
